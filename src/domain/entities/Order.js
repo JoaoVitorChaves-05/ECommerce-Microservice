@@ -56,8 +56,16 @@ class OrderItem {
     }
 }
 
-const OrderStatus = {
-    PENDING: 'pending',
-    COMPLETED: 'completed',
-    CANCELLED: 'cancelled'
+class OrderStatus {
+    constructor(orderStatus) {
+        const status = {
+            PENDING: 'pending',
+            COMPLETED: 'completed',
+            CANCELLED: 'cancelled'
+        }
+        
+        this.orderStatus = status[orderStatus] ? status[orderStatus] : status['CANCELLED']
+    }
 }
+
+export default { Order, OrderItem, OrderStatus };
