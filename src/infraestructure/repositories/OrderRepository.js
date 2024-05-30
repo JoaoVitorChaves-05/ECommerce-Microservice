@@ -19,7 +19,8 @@ class OrderRepository {
 
     async findAll() {
         const orderRecords = await OrderModel.findAll()
-        return orderRecords.map(orderRecord => new Order(orderRecord.customerId, orderRecord.totalPrice, orderRecord.status))
+        .then(res => res.map(el => el.toJSON()))
+        return orderRecords.map(orderRecord => new Order(orderRecord.customerId, orderRecord.status, orderRecord.totalPrice))
     }
 
     async update(order) {

@@ -9,4 +9,5 @@ class Database {
         this.models = {}
     }
 }
+
 export default new Database ();

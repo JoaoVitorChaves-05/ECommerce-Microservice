@@ -1,14 +1,14 @@
 import OrderRepository from "../../../infraestructure/repositories/OrderRepository.js"
 
-class GetAllOrders {
+class GetOneOrder {
     constructor() {
         this.orderRepository = OrderRepository
     }
 
-    async execute() {
-        const result = await this.orderRepository.findAll()
+    async execute(orderId) {
+        const result = await this.orderRepository.findById(orderId)
         return result
     }
 }
 
-export default new GetAllOrders();
+export default new GetOneOrder();
