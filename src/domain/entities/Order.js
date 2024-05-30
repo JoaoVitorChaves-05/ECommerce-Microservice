@@ -1,8 +1,8 @@
 class Order {
-    constructor(customerId, items, orderStatus) {
+    constructor(customerId, orderStatus) {
         this.customerId = customerId;
-        this.items = items;
-        this.orderStatus = orderStatus;
+        this.items = [];
+        this.status = orderStatus;
         this.totalPrice = 0;
     }
 
@@ -64,7 +64,7 @@ class OrderStatus {
             CANCELLED: 'cancelled'
         }
         
-        this.orderStatus = status[orderStatus] ? status[orderStatus] : status['CANCELLED']
+        this.status = status[orderStatus] ? status[orderStatus] : status['CANCELLED']
     }
 }
 
