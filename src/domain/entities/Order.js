@@ -68,4 +68,4 @@ class OrderStatus {
     }
 }
 
-export default { Order, OrderItem, OrderStatus };
+export { Order, OrderItem, OrderStatus };

@@ -1,21 +1,16 @@
-import database from "../infraestructure/database.js"
-import OrderModel from "../infraestructure/models/order.js"
-import CustomerModel from "../infraestructure/models/Customer.js"
-import app from "./app.js"
-import events from "events"
+
+import database from "../infraestructure/database.js";
+import models from "../infraestructure/models/index.js";
+import app from "./app.js";
+
 
 (async () => {
     try {
-        if (OrderModel != database.models.OrderModel)
-            throw new Error("Order model must be defined")
-        if (CustomerModel != database.models.Customer)
-            throw new Error("Customer model must be defined")
-        eventEmitter.emit('database_on')
-    } catch (e) {
-        console.error(e)
+        await database.connection.sync();
+        console.log('Database synchronized successfully.');
+
+        app.listen(3000, () => console.log('Running on http://localhost:3000'));
+    } catch (error) {
+        console.error('Unable to synchronize the database:', error);
     }
 })()
-
-const eventEmitter = new events.EventEmitter()
-
-eventEmitter.on('database_on', () => app.listen(3000, () => console.log('Running on http://localhost:3000')))

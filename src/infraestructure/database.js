@@ -5,8 +5,8 @@ dotenv.config()
 
 class Database {
     constructor() {
-        this.connection = new Sequelize(`mysql://${process.env.MYSQL_USERNAME}@${process.env.MYSQL_PASSWORD}:${process.env.MYSQL_PORT}/${process.env.MYSQL_NAME}`)
+        this.connection = new Sequelize(`${process.env.DATABASE_URL}`)
+        this.models = {}
     }
 }
-
 export default new Database ();
