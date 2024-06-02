@@ -2,8 +2,12 @@ import { Order } from '../../domain/entities/Order.js'
 import OrderModel from '../models/Order.js'
 
 class OrderRepository {
-    async save() {
-        await OrderModel.create(new Order(1, 198, 'PENDING'))
+    async save(customerId, totalPrice, status) {
+        await OrderModel.create(new Order(customerId, totalPrice, status))
+    }
+
+    async vinculate(orderId, orderItems) {
+        await OrderModel.vinculate(orderId, orderItems)
     }
 
     async findById(orderId) {

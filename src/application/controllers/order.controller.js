@@ -32,6 +32,23 @@ class Order {
 
         if (!customerId || !orderItems)
             return res.status(404).json({ error: "Missing data"})
+
+        const totalPrice = await CalculateTotalPrice.execute(orderItems)
+
+        const result = await UpdateOneOrder.execute(customerId, orderItems, totalPrice)
+
+        return res.status(200).json(result)
+    }
+
+    async deleteOrder(req, res) {
+        const { customerId } = req.body
+
+        if (!customerId)
+            return res.status(301).json({ error: "Missing data"})
+
+        const result = await DeleteOneOrder.execute(customerId)
+
+        return res.status(200).json(result)
     }
 }
 
