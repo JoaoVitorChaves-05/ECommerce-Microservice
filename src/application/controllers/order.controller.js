@@ -13,6 +13,26 @@ class Order {
         const result = await GetOneOrder.execute(req.params.orderId)
         return res.status(200).json(result)
     }
+
+    async postOrder(req, res) {
+        const { customerId, orderItems } = req.body
+
+        if (!customerId || !orderItems)
+            return res.status(404).json({ error: "Missing data"})
+
+        const totalPrice = await CalculateTotalPrice.execute(orderItems)
+
+        const result = await PostOneOrder.execute(customerId, orderItems, totalPrice)
+
+        return res.status(200).json(result)
+    }
+
+    async updateOrder(req, res) {
+        const { customerId, orderItems } = req.body
+
+        if (!customerId || !orderItems)
+            return res.status(404).json({ error: "Missing data"})
+    }
 }
 
 export default new Order();
