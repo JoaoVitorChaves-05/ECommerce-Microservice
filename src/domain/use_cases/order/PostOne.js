@@ -5,10 +5,12 @@ class PostOneOrder {
     async execute(customerId, orderItems, totalPrice, status) {
         try {
             const resultOrder = await OrderRepository.save(customerId, totalPrice, status)
+            .then(res => res.toJSON())
             const resultProductOrder = await OrderRepository.vinculate(customerId, orderItems)
-            return true
+
+            return resultOrder
         } catch (e) {
-            return { error: e}
+            return { error: e }
         }
     }
 }

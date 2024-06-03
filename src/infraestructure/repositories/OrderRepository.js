@@ -1,5 +1,6 @@
-import { Order } from '../../domain/entities/Order.js'
+import { Order, OrderItem } from '../../domain/entities/Order.js'
 import OrderModel from '../models/Order.js'
+import ProductOrder from '../models/ProductOrder.js'
 
 class OrderRepository {
     async save(customerId, totalPrice, status) {
@@ -7,7 +8,14 @@ class OrderRepository {
     }
 
     async vinculate(orderId, orderItems) {
-        await OrderModel.vinculate(orderId, orderItems)
+        for (let i = 0; i < orderItems.length; i++)
+            await ProductOrder.create({ orderId, ...new OrderItem(orderItems[i].productId, orderItems[i].pricePerUnit, orderItems[i].quantity)})
+    }
+
+    async desvinculate(orderId) {
+        await ProductOrder.destroy({
+            where: { orderId: orderId}
+        })
     }
 
     async findById(orderId) {
@@ -43,4 +51,4 @@ class OrderRepository {
     }
 }
 
-export default new OrderRepository();
+export default new OrderRepository()
