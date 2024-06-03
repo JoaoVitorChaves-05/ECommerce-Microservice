@@ -8,6 +8,6 @@ Develop a robust system to manage e-commerce orders, which includes functionalit
 
 * Node.js
 * MySQL
-* Kafka
+* RabbitMQ
 * Docker
 
