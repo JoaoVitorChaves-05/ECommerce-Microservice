@@ -2,6 +2,7 @@ import GetAllOrders from "../../domain/use_cases/order/GetAll.js";
 import GetOneOrder from "../../domain/use_cases/order/GetOne.js";
 import PostOneOrder from "../../domain/use_cases/order/PostOne.js";
 import UpdateOneOrder from "../../domain/use_cases/order/UpdateOne.js";
+import DeleteOneOrder from "../../domain/use_cases/order/DeleteOne.js";
 import CalculateTotalPrice from "../../domain/use_cases/product/CalculateTotalPrice.js";
 import Producer from "../../../infraestructure/services/Producer.js"
 
@@ -66,6 +67,14 @@ class Order {
             return res.status(301).json({ error: "Missing data"})
 
         const result = await DeleteOneOrder.execute(customerId)
+
+        if (!result)
+            return res.status(301).json({ error: "The orderId is not valid or inexists" })
+
+        Producer.sendMessage('order_deleted', {
+            ...result,
+            orderItems: orderItems,
+        })
 
         return res.status(200).json(result)
     }
