@@ -1,32 +1,22 @@
-import amqp from 'amqplib/callback_api'
+import amqp from 'amqplib'
 
 class Producer {
-    sendMessage(queue, order) {
-        amqp.connect('amqp://localhost', (error0, connection) => {
-            if (error0)
-                throw error0
 
-            connection.createChannel((error1, channel) => {
-                if (error1)
-                    throw error1
+    async sendMessage(queue, order) {
+        const connection = await amqp.connect('amqp://localhost')
+        const channel = await connection.createChannel();
+        await channel.assertQueue(queue);
 
-                const message = JSON.stringify(order)
-
-                channel.assertQueue(queue, {
-                    durable: true,
-                })
-
-                channel.sendToQueue(queue, Buffer.from(message), {
-                    persistent: true,
-                })
-
-                console.log(" [X] Sent %s", message)
+        try {
+            await channel.sendToQueue(queue, Buffer.from(JSON.stringify(order)), {
+                persistent: true
             })
-
-            setTimeout(() => {
-                connection.close()
-            }, 500)
-        })
+            console.log(`Message sent to ${queue}: ${JSON.stringify(order)}`)
+        } catch (error) {
+            console.error(`Error sending message to ${queue}: ${error.message}`)
+        } finally {
+            channel.close()
+        }
     }
 }
 

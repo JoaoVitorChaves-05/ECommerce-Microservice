@@ -4,7 +4,7 @@ import PostOneOrder from "../../domain/use_cases/order/PostOne.js";
 import UpdateOneOrder from "../../domain/use_cases/order/UpdateOne.js";
 import DeleteOneOrder from "../../domain/use_cases/order/DeleteOne.js";
 import CalculateTotalPrice from "../../domain/use_cases/product/CalculateTotalPrice.js";
-import Producer from "../../../infraestructure/services/Producer.js"
+import Producer from "../../infraestructure/services/Producer.js"
 
 class Order {
     async getAll(req, res) {
@@ -32,11 +32,13 @@ class Order {
         if (!totalPrice)
             return res.status(301).json({ error: "The order items has an invalid productId" })
 
-        const result = await PostOneOrder.execute(customerId, orderItems, totalPrice, 'PENDING')
+        //const result = await PostOneOrder.execute(customerId, orderItems, totalPrice, 'PENDING')
 
-        Producer.sendMessage('order_created', { ...resultOrder, orderItems: orderItems })
+        //Producer.sendMessage('order_created', { ...result, orderItems: orderItems })
 
-        return res.status(200).json(result)
+        Producer.sendMessage('order_created', {customerId, totalPrice, status: 'PENDING', orderItems: orderItems})
+
+        return res.status(200).json(200)
     }
 
     async updateOrder(req, res) {
@@ -50,33 +52,41 @@ class Order {
         if (!totalPrice)
             return res.status(301).json({ error: "The order items has an invalid productId" })
 
-        const result = await UpdateOneOrder.execute(orderId, orderItems, totalPrice)
+        //const result = await UpdateOneOrder.execute(orderId, orderItems, totalPrice)
 
-        Producer.sendMessage('order_updated', {
+        /*Producer.sendMessage('order_updated', {
             ...result,
             orderItems: orderItems,
+        })*/
+
+        Producer.sendMessage('order_updated', {
+            orderId,
+            orderItems,
+            totalPrice
         })
 
-        return res.status(200).json(result)
+        return res.status(200).json("Message received")
     }
 
     async deleteOrder(req, res) {
-        const { customerId } = req.body
+        const { customerId, orderId } = req.body
 
-        if (!customerId)
+        if (!customerId || !orderId)
             return res.status(301).json({ error: "Missing data"})
 
+        /*
         const result = await DeleteOneOrder.execute(customerId)
 
         if (!result)
             return res.status(301).json({ error: "The orderId is not valid or inexists" })
+        */
 
         Producer.sendMessage('order_deleted', {
-            ...result,
-            orderItems: orderItems,
+            orderId,
+            customerId,
         })
 
-        return res.status(200).json(result)
+        return res.status(200).json("Message received")
     }
 }
 

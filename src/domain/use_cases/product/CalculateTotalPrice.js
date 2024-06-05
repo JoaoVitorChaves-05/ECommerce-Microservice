@@ -6,8 +6,8 @@ class CalculateTotalPrice {
 
         try {
             for (let item of orderItems) {
-                const {pricePerUnit} = await ProductRepository.findById(item.productId)
-                sum += pricePerUnit * item.quantity
+                //const {pricePerUnit} = await ProductRepository.findById(item.productId)
+                sum += item.pricePerUnit * item.quantity
             }
     
             return sum

@@ -1,9 +1,9 @@
 class Order {
-    constructor(customerId, orderStatus) {
+    constructor(customerId, orderStatus, totalPrice) {
         this.customerId = customerId;
         this.items = [];
         this.status = orderStatus;
-        this.totalPrice = 0;
+        this.totalPrice = totalPrice || 0;
     }
 
     addProduct(productId, quantity) {

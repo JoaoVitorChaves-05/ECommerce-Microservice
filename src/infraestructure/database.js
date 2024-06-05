@@ -5,9 +5,12 @@ dotenv.config()
 
 class Database {
     constructor() {
+        console.log(process.env.DATABASE_URL)
         this.connection = new Sequelize(`${process.env.DATABASE_URL}`)
         this.models = {}
     }
 }
 
-export default new Database ();
+const database = new Database()
+
+export default database

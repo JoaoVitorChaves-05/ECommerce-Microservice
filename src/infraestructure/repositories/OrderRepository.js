@@ -4,7 +4,7 @@ import ProductOrder from '../models/ProductOrder.js'
 
 class OrderRepository {
     async save(customerId, totalPrice, status) {
-        await OrderModel.create(new Order(customerId, totalPrice, status))
+        await OrderModel.create(new Order(customerId, status, totalPrice))
     }
 
     async vinculate(orderId, orderItems) {
