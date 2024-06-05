@@ -5,7 +5,7 @@ class DeleteOneOrder {
     async execute(orderId) {
         try {
             const result = await OrderRepository.destroy(orderId)
-            .then(res => res.toJSON())
+            await OrderRepository.desvinculate(orderId)
 
             return result
         } catch (err) {

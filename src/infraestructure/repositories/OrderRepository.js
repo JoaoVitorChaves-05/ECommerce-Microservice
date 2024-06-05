@@ -42,12 +42,12 @@ class OrderRepository {
                 totalPrice: order.totalPrice,
                 status: order.status,
             },
-            { where: { id: order.orderId } }
+            { where: { orderId: order.orderId } }
         )
     }
 
     async destroy(orderId) {
-        await OrderModel.destroy({ where: { id: orderId } });
+        await OrderModel.destroy({ where: { orderId: orderId } });
     }
 }
 

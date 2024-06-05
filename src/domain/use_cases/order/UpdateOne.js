@@ -10,7 +10,6 @@ class UpdateOneOrder {
             await OrderRepository.vinculate(orderId, orderItems)
 
             const result = await OrderRepository.update({ orderId: orderId, totalPrice: totalPrice, status: status })
-            .then(res => res.toJSON())
 
             return result
         } catch (e) {

@@ -65,7 +65,7 @@ class Order {
             totalPrice
         })
 
-        return res.status(200).json("Message received")
+        return res.status(200).json(200)
     }
 
     async deleteOrder(req, res) {
