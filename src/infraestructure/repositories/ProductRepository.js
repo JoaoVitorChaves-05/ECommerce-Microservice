@@ -1,3 +1,4 @@
+import { where } from 'sequelize'
 import Product from '../../domain/entities/Product.js'
 import ProductModel from '../models/Product.js'
 
@@ -58,6 +59,10 @@ class ProductRepository {
             })
         }
 
+    }
+
+    async destroy(productId) {
+        await OrderModel.destroy({ where: { productId: productId} })
     }
 }
 
