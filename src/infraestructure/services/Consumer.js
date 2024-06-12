@@ -4,6 +4,12 @@ import PostOneOrder from "../../domain/use_cases/order/PostOne.js"
 import UpdateOneOrder from "../../domain/use_cases/order/UpdateOne.js"
 import DeleteOneOrder from "../../domain/use_cases/order/DeleteOne.js"
 
+import PostOneProduct from "../../domain/use_cases/product/PostOne.js"
+import UpdateOneProduct from "../../domain/use_cases/product/UpdateOne.js"
+import DeleteOneProduct from "../../domain/use_cases/product/DeleteOne.js"
+import AddUnitProduct from "../../domain/use_cases/product/AddUnit.js"
+import RemoveUnitProduct from "../../domain/use_cases/product/RemoveUnit.js"
+
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -18,6 +24,21 @@ const selectUseCase = async (message, queue) => {
     },
     'order_deleted': async () => {
       await DeleteOneOrder.execute(message.orderId)
+    },
+    'product_created': async () => {
+      await PostOneProduct.execute(message.productName, message.pricePerUnit, message.units)
+    },
+    'product_updated': async () => {
+      await UpdateOneProduct.execute(message.productId, message.productName, message.pricePerUnit)
+    },
+    'product_added': async () => {
+      await AddUnitProduct.execute(message.productId, message.units)
+    },
+    'product_removed': async () => {
+      await RemoveUnitProduct.execute(message.productId, message.units)
+    },
+    'product_deleted': async () => {
+      await DeleteOneProduct.execute(message.productId)
     }
   }
 
