@@ -20,6 +20,7 @@ class OrderRepository {
 
     async findById(orderId) {
         const orderRecord = await OrderModel.findByPk(orderId)
+        
         if (!orderRecord) return null
     
         return new Order(
