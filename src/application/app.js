@@ -1,5 +1,7 @@
 import express from 'express'
 import order from './routes/order.routes.js'
+import product from './routes/product.routes.js'
+import customer from './routes/customer.routes.js'
 
 class App {
     constructor() {
@@ -15,7 +17,8 @@ class App {
 
     routes() {
         this.app.use('/order', order)
-        
+        this.app.use('/customer', customer)
+        this.app.use('/product', product)
     }
 }
 

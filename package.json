@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./src/application/index.js"
+    "start": "node ./src/application/index.js",
+    "swagger": "node ./src/application/swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
     "kafkajs": "^2.2.4",
     "mysql2": "^3.9.9",
     "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
   }
 }

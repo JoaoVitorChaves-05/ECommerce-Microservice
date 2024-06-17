@@ -5,7 +5,7 @@ import UpdateOneOrder from "../../domain/use_cases/order/UpdateOne.js"
 import DeleteOneOrder from "../../domain/use_cases/order/DeleteOne.js"
 
 import PostOneProduct from "../../domain/use_cases/product/PostOne.js"
-import UpdateOneProduct from "../../domain/use_cases/product/UpdateOne.js"
+import UpdateNameProduct from "../../domain/use_cases/product/UpdateName.js"
 import DeleteOneProduct from "../../domain/use_cases/product/DeleteOne.js"
 import AddUnitProduct from "../../domain/use_cases/product/AddUnit.js"
 import RemoveUnitProduct from "../../domain/use_cases/product/RemoveUnit.js"
@@ -33,7 +33,7 @@ const selectUseCase = async (message, queue) => {
       await PostOneProduct.execute(message.productName, message.pricePerUnit, message.units)
     },
     'product_updated': async () => {
-      await UpdateOneProduct.execute(message.productId, message.productName, message.pricePerUnit)
+      await UpdateNameProduct.execute(message.productId, message.productName)
     },
     'product_added': async () => {
       await AddUnitProduct.execute(message.productId, message.units)
