@@ -5,7 +5,7 @@ class UpdateOneCustomer {
     async execute(email, password, newData) {
         try {
             const user = await CustomerRepository.findByEmail(email)
-            const match = await bcryptjs.compareSync(password, user.passwordHash)
+            const match = bcryptjs.compareSync(password, user.passwordHash)
 
             if (!match)
                 return false

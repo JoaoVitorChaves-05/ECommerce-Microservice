@@ -10,6 +10,10 @@ import DeleteOneProduct from "../../domain/use_cases/product/DeleteOne.js"
 import AddUnitProduct from "../../domain/use_cases/product/AddUnit.js"
 import RemoveUnitProduct from "../../domain/use_cases/product/RemoveUnit.js"
 
+import PostOneCustomer from "../../domain/use_cases/customer/PostOne.js"
+import UpdateOneCustomer from "../../domain/use_cases/customer/UpdateOne.js"
+import DeleteOneCustomer from "../../domain/use_cases/customer/DeleteOne.js"
+
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -39,6 +43,15 @@ const selectUseCase = async (message, queue) => {
     },
     'product_deleted': async () => {
       await DeleteOneProduct.execute(message.productId)
+    },
+    'customer_added': async () => {
+      await PostOneCustomer.execute(message.name, message.email, message.password)
+    },
+    'customer_updated': async () => {
+      await UpdateOneCustomer.execute(message.email, message.password, message.newData)
+    },
+    'customer_deleted': async () => {
+      await DeleteOneCustomer.execute(message.email, message.password)
     }
   }
 
