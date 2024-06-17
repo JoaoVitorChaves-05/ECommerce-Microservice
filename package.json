@@ -18,7 +18,8 @@
     "express": "^4.19.2",
     "kafkajs": "^2.2.4",
     "mysql2": "^3.9.9",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "swagger-autogen": "^2.23.7"
