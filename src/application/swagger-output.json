@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "description": "Description",
+    "title": "E-Commerce API",
+    "description": "API Documentation",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -10,10 +10,25 @@
   "schemes": [
     "http"
   ],
+  "tags": [
+    {
+      "name": "Order",
+      "description": "Order-related operations"
+    },
+    {
+      "name": "Product",
+      "description": "Product-related operations"
+    },
+    {
+      "name": "Customer",
+      "description": "Customer-related operations"
+    }
+  ],
   "paths": {
     "/order/": {
       "get": {
-        "description": "",
+        "description": "Get all orders",
+        "tags": ["Order"],
         "responses": {
           "200": {
             "description": "OK"
@@ -21,7 +36,8 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Post one order",
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "body",
@@ -52,7 +68,8 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update one user",
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "body",
@@ -61,13 +78,13 @@
               "type": "object",
               "properties": {
                 "customerId": {
-                  "example": "any"
+                  "example": "1"
                 },
                 "orderItems": {
-                  "example": "any"
+                  "example": "[{ productId: 1, pricePerUnit: 6.99, quantity: 2 }]"
                 },
                 "orderId": {
-                  "example": "any"
+                  "example": "1"
                 }
               }
             }
@@ -86,7 +103,8 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete one order",
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "body",
@@ -95,10 +113,10 @@
               "type": "object",
               "properties": {
                 "customerId": {
-                  "example": "any"
+                  "example": "1"
                 },
                 "orderId": {
-                  "example": "any"
+                  "example": "1"
                 }
               }
             }
@@ -116,7 +134,8 @@
     },
     "/order/orderId/{orderId}": {
       "get": {
-        "description": "",
+        "description": "Get one order",
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "orderId",
@@ -137,7 +156,8 @@
     },
     "/customer/": {
       "get": {
-        "description": "",
+        "description": "Get all customers",
+        "tags": ["Customer"],
         "responses": {
           "200": {
             "description": "OK"
@@ -145,7 +165,8 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Post one customer",
+        "tags": ["Customer"],
         "parameters": [
           {
             "name": "body",
@@ -154,13 +175,13 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "example": "joão"
                 },
                 "email": {
-                  "example": "any"
+                  "example": "joao@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "example": "password"
                 }
               }
             }
@@ -176,7 +197,8 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update an user",
+        "tags": ["Customer"],
         "parameters": [
           {
             "name": "body",
@@ -185,13 +207,13 @@
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "example": "joao@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "example": "password"
                 },
                 "newData": {
-                  "example": "any"
+                  "example": "{ name: 'John' }"
                 }
               }
             }
@@ -207,7 +229,8 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete one user",
+        "tags": ["Customer"],
         "parameters": [
           {
             "name": "body",
@@ -216,10 +239,10 @@
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "example": "joao@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "example": "password"
                 }
               }
             }
@@ -237,7 +260,8 @@
     },
     "/customer/customerId/{customerId}": {
       "get": {
-        "description": "",
+        "description": "Get one customer",
+        "tags": ["Customer"],
         "parameters": [
           {
             "name": "customerId",
@@ -258,7 +282,8 @@
     },
     "/product/": {
       "get": {
-        "description": "",
+        "description": "Get all products",
+        "tags": ["Product"],
         "responses": {
           "200": {
             "description": "OK"
@@ -266,7 +291,8 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Post one product",
+        "tags": ["Product"],
         "parameters": [
           {
             "name": "body",
@@ -297,7 +323,8 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Put one product",
+        "tags": ["Product"],
         "parameters": [
           {
             "name": "body",
@@ -306,13 +333,13 @@
               "type": "object",
               "properties": {
                 "productId": {
-                  "example": "any"
+                  "example": "1"
                 },
                 "productName": {
-                  "example": "any"
+                  "example": "Potato chips"
                 },
                 "pricePerUnit": {
-                  "example": "any"
+                  "example": "6.99"
                 }
               }
             }
@@ -328,7 +355,8 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete one product",
+        "tags": ["Product"],
         "parameters": [
           {
             "name": "body",
@@ -337,7 +365,7 @@
               "type": "object",
               "properties": {
                 "productId": {
-                  "example": "any"
+                  "example": "1"
                 }
               }
             }
@@ -355,7 +383,8 @@
     },
     "/product/productId/{productId}": {
       "get": {
-        "description": "",
+        "description": "Get one product",
+        "tags": ["Product"],
         "parameters": [
           {
             "name": "productId",
@@ -376,7 +405,8 @@
     },
     "/product/unit": {
       "post": {
-        "description": "",
+        "description": "Product add unit",
+        "tags": ["Product"],
         "parameters": [
           {
             "name": "body",
@@ -385,10 +415,10 @@
               "type": "object",
               "properties": {
                 "productId": {
-                  "example": "any"
+                  "example": "1"
                 },
                 "units": {
-                  "example": "any"
+                  "example": "25"
                 }
               }
             }
@@ -404,7 +434,8 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Product remove unit",
+        "tags": ["Product"],
         "parameters": [
           {
             "name": "body",
@@ -413,10 +444,10 @@
               "type": "object",
               "properties": {
                 "productId": {
-                  "example": "any"
+                  "example": "1"
                 },
                 "units": {
-                  "example": "any"
+                  "example": "1"
                 }
               }
             }

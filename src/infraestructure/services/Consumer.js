@@ -61,7 +61,7 @@ const selectUseCase = async (message, queue) => {
 class Consumer {
   async create(callback) {
     const connection = await amqp.connect('amqp://localhost')
-    const queues = ['order_created', 'order_updated', 'order_deleted']
+    const queues = ['order_created', 'order_updated', 'order_deleted', 'product_created', 'product_updated', 'product_added', 'product_removed', 'product_deleted', 'customer_added', 'customer_updated', 'customer_deleted']
     queues.forEach(async (queue) => {
       const channel = await connection.createChannel()
       await channel.assertQueue(queue)
