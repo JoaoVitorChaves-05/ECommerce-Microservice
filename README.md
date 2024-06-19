@@ -11,3 +11,9 @@ Develop a robust system to manage e-commerce orders, which includes functionalit
 * RabbitMQ
 * Docker
 
+## Installation and configuration
+
+1. Make sure you have Docker and Git installed.
+2. Clone this repository: ``git clone https://github.com/JoaoVitorChaves-05/ECommerce-Microservice.git``
+3. Go to the project directory: ``cd ./ECommerce-Microservice``
+4. Run the following command: ``docker compose up -d``
